@@ -10,7 +10,6 @@ VPS read only -FSCK
 
 ploop check -F /vz/private/efc87028-1161-4acc-aef6-644598d7041b/root.hdd/root.hds
 ploop mount /vz/private/efc87028-1161-4acc-aef6-644598d7041b/root.hdd/DiskDescriptor.xml
-​[3/10 8:35 PM] Nadeem Shaikh
 e2fsck /dev/ploop60623p1
 
 Disk space:

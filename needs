@@ -1,0 +1,74 @@
+
+
+Netstat: 
+
+cat /usr/local/apache/logs/access_log |awk '{print $1}' |sort |uniq -c |sort -n |tail
+netstat -ntu | awk ' $5 ~ /^[0-9]/ {print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+
+
+VPS read only -FSCK
+
+ploop check -F /vz/private/efc87028-1161-4acc-aef6-644598d7041b/root.hdd/root.hds
+ploop mount /vz/private/efc87028-1161-4acc-aef6-644598d7041b/root.hdd/DiskDescriptor.xml
+​[3/10 8:35 PM] Nadeem Shaikh
+e2fsck /dev/ploop60623p1
+
+Disk space:
+find . -size +800M -exec du -h {} \; > /root/output.txt
+
+Exim scrips mailing:
+grep cwd=/ /var/log/exim_mainlog | cut -d = -f 2 | cut -d " " -f 1 | sort | uniq -c | sort -n
+
+IP:
+
+netstat -ntu | grep :80 | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+
+rsync -azvh -e'ssh -p PORTNO' --progress facturation.tar.gz sshadmin@54.39.100.235:/home/ibeaulie/public_html/data/
+EX: rsync -azvh -e 'ssh -p 2243' --progress test root@198.27.80.215:/home/migration/
+
+Du:
+du -sch .[!.]*  * | sort -h ---with hidden files
+
+Rdate: 
+rdate -s rdate.cpanel.net
+
+
+netstat -anp |grep 'tcp\|udp' | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+
+netstat -tulnap | awk '{print $7}' | sed -n -e '/[/]/p' | cut -s -d'/' -f2 | sort | uniq -c | sort -nk 1
+​To kick out dovecot:
+for i in $(doveadm who|awk '$2>5{print $1}'); do doveadm kick -f $i; done
+
+Container Backup logs on VZnode.
+tail -f /usr/local/solusvm/tmp/backup.log
+
+Clear error logs from the containers:
+for i in `vzlist -a  | awk {'print $1'}`; do echo "Container $i"; vzctl exec $i "find /home -name "error_log" -size +1G -exec ls -lh {} \;" -delete; done
+
+VZnode freeup swap:
+for i in `vzlist | awk {'print $1'}`;do echo "";echo $i; vzctl exec $i "service cpanel-dovecot-solr.service restart";done
+
+Rsync
+rsync -azvh 'ssh -p PORTNO'--progress facturation.tar.gz sshadmin@54.39.100.235:/home/ibeaulie/public_html/data/
+
+rsync -azvh 'ssh -p 2243'--progress user-uploads root@198.27.80.215:/home/migration/
+
+For Mysql
+mysqlcheck --all-databases -r #repair
+mysqlcheck --all-databases -a #analyze
+mysqlcheck --all-databases -o #optimize
+
+
+
+HOw to HSTS:
+#Security header Enable HSTS
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+To verify: https://hstspreload.org/
+
+
+
+IMP LINKS:
+https://github.com/mirhosting/cPanel-docker
+https://www.vpsblocks.com.au/support/Knowledgebase/Article/View/228/11/list-number-of-hits-to-apache-per-ip-address
+https://se1.web-dns1.com/deliveryoutgoingqueue.php

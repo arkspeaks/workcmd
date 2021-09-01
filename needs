@@ -57,7 +57,8 @@ mysqlcheck --all-databases -r #repair
 mysqlcheck --all-databases -a #analyze
 mysqlcheck --all-databases -o #optimize
 
-
+To find missing contents: 
+for i in /home/*; do if [ ! -d $i/public_html ]; then echo " $i/public_html missing"; fi done
 
 HOw to HSTS:
 #Security header Enable HSTS

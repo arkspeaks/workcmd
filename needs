@@ -72,3 +72,8 @@ IMP LINKS:
 https://github.com/mirhosting/cPanel-docker
 https://www.vpsblocks.com.au/support/Knowledgebase/Article/View/228/11/list-number-of-hits-to-apache-per-ip-address
 https://se1.web-dns1.com/deliveryoutgoingqueue.php
+Mgento2 permissions: https://magento.stackexchange.com/questions/278485/set-the-correct-magento-permissions
+Magento 2 recommended folder and file permission
+Please follow following terminal commands for folder and file permission.
+
+find . -type f -exec chmod 644 {} \;find . -type d -exec chmod 755 {} \;find var pub/static pub/media  generated/ app/etc -type f -exec chmod g+w {} \;find var pub/static pub/media generated/ app/etc -type d -exec chmod g+ws {} \;chmod u+x bin/magento
